@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+
+  <!-- ===== Glow Filter ===== -->
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <!-- cyan glow -->
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00ffff"/>
+      <!-- navy glow -->
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#001f3f"/>
+    </filter>
+
+    <!-- gradient for cyan → navy mix -->
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#001f3f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== CPU Icon ===== -->
+  <g filter="url(#glow)">
+
+    <!-- chip body -->
+    <rect x="28" y="28" width="72" height="72" rx="12" fill="url(#grad)"/>
+
+    <!-- inner core -->
+    <rect x="46" y="46" width="36" height="36" rx="6" fill="#0ff"/>
+
+    <!-- pins -->
+    <g fill="#00ffff">
+      <!-- top -->
+      <rect x="40" y="8" width="8" height="16"/>
+      <rect x="60" y="8" width="8" height="16"/>
+      <rect x="80" y="8" width="8" height="16"/>
+
+      <!-- bottom -->
+      <rect x="40" y="104" width="8" height="16"/>
+      <rect x="60" y="104" width="8" height="16"/>
+      <rect x="80" y="104" width="8" height="16"/>
+
+      <!-- left -->
+      <rect x="8" y="40" width="16" height="8"/>
+      <rect x="8" y="60" width="16" height="8"/>
+      <rect x="8" y="80" width="16" height="8"/>
+
+      <!-- right -->
+      <rect x="104" y="40" width="16" height="8"/>
+      <rect x="104" y="60" width="16" height="8"/>
+      <rect x="104" y="80" width="16" height="8"/>
+    </g>
+
+  </g>
+</svg>
