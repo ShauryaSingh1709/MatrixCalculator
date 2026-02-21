@@ -1,18 +1,13 @@
 # MatrixLab - Advanced Linear Algebra Environment
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?logo=tailwind-css&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-4.0-646CFF?logo=vite&logoColor=white)
 
 **MatrixLab** is a premium, portfolio-grade linear algebra laboratory designed to visualize complex matrix operations with precision and style. Unlike standard calculators, MatrixLab features a custom-built mathematical engine (no external math libraries), "AI-style" step-by-step explanations, and a high-fidelity glassmorphism UI.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🧮 Advanced Mathematical Engine
+###  Advanced Mathematical Engine
 Built entirely in **pure TypeScript**, the math engine handles arbitrary `N x M` matrices with floating-point precision handling.
 
 **Single Matrix Operations:**
@@ -26,12 +21,12 @@ Built entirely in **pure TypeScript**, the math engine handles arbitrary `N x M`
 - **Multiplication:** Supports `(m×n) • (n×p)` dimensions.
 - **Addition / Subtraction:** Element-wise operations with dimension validation.
 
-### 🧠 "AI" Step-by-Step Explanations
+###  "AI" Step-by-Step Explanations
 The system doesn't just give the answer—it teaches the concept.
 - **Verbose Logs:** Displays every row swap, scalar multiplication, and row addition performed during Gaussian elimination.
 - **Traceability:** Users can follow the algorithm's logic for study and verification.
 
-### 🎨 Premium UI/UX
+###  Premium UI/UX
 - **Dual Theme Engine:** Toggle between **Cyberpunk Dark** and **Clean Light** modes instantly.
 - **Atmospheric Effects:** Custom canvas-based animated **Snowfall** and ambient glow orbs.
 - **Glassmorphism:** Frosted glass panels, neon accents, and backdrop blurs.
@@ -96,15 +91,15 @@ The output will be generated in the `dist/` folder.
 ```text
 src/
 ├── components/
-│   ├── Background.tsx    # Canvas animation controller
-│   ├── MatrixInput.tsx   # Dynamic grid input with validation
-│   ├── ResultDisplay.tsx # Result renderer + Step-by-step logs
-│   └── Snowfall.tsx      # Theme-aware particle engine
+│   ├── Background.tsx   
+│   ├── MatrixInput.tsx   
+│   ├── ResultDisplay.tsx 
+│   └── Snowfall.tsx     
 ├── lib/
-│   └── matrix.ts         # CORE MATH ENGINE (Pure Logic)
-├── App.tsx               # Main state orchestrator
-├── index.css             # Tailwind & Custom CSS variables
-└── main.tsx              # Entry point
+│   └── matrix.ts        
+├── App.tsx              
+├── index.css             
+└── main.tsx             
 ```
 
 ## 📐 Math Implementation Details
@@ -127,13 +122,5 @@ if (pivot !== 1) {
 
 ---
 
-## 👨‍💻 Author
-
-**Engineer & Designer**
-*Built as a showcase of Full-Stack Engineering & Advanced UI capabilities.*
-
----
-
-## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
