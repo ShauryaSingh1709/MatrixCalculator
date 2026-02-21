@@ -201,15 +201,7 @@ export function App() {
       <div className="relative z-10 flex flex-col min-h-screen">
         <div className="flex items-center justify-between max-w-6xl mx-auto w-full px-4 pt-4">
            {/* Theme Toggle - Fixed bottom right */}
-           <div className="fixed bottom-6 right-6 z-50">
-             <button
-               onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
-               className="p-3 rounded-full bg-slate-800 shadow-xl hover:bg-slate-700 text-slate-400 hover:text-yellow-300 transition-all border border-white/10"
-               title="Toggle Theme"
-             >
-               {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-             </button>
-           </div>
+           
         </div>
 
         <Header />
