@@ -1,3 +1,4 @@
+//shau
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Snowfall } from '@/components/Snowfall';
 import { GlowOrbs } from '@/components/Background';
