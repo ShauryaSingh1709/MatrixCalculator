@@ -101,5 +101,65 @@ src/
 ├── index.css             
 └── main.tsx             
 ```
+---
 
+##  Contributors & Acknowledgements
+
+MatrixLab is proudly built with collaboration, precision, and dedication.  
+We sincerely thank the following contributors for their valuable efforts in improving the mathematical engine, UI design, optimization, and documentation.
+
+---
+
+### Project Contributors
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/ShauryaSingh1709" target="_blank">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="60" />
+        <br />
+        <sub><b>Shaurya</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ADiBariya" target="_blank">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="60" />
+        <br />
+        <sub><b>Aditya</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Hamzaul" target="_blank">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="60" />
+        <br />
+        <sub><b>Hamza</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/alavyaa" target="_blank">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="60" />
+        <br />
+        <sub><b>Alavya</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Vishwas-panwar" target="_blank">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="60" />
+        <br />
+        <sub><b>Vishwas</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+---
+
+###  Special Thanks
+
+A heartfelt thank you to all contributors for investing time, skills, and passion into this project.  
+Your support helps make **MatrixLab** a premium, portfolio-grade linear algebra environment.
+
+
+
+---
 
