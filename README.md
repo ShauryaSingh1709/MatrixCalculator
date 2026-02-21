@@ -102,25 +102,4 @@ src/
 └── main.tsx             
 ```
 
-## 📐 Math Implementation Details
 
-The core logic resides in `src/lib/matrix.ts`.
-
-**Example: Gaussian Elimination Strategy**
-1. **Partial Pivoting:** Finds the largest absolute value in the current column to minimize floating-point error.
-2. **Row Swapping:** Physically swaps rows in the data structure and logs the action.
-3. **Normalization:** Divides the pivot row to make the leading coefficient `1`.
-4. **Elimination:** Subtracts multiples of the pivot row from other rows to create zeros.
-
-```typescript
-// Pseudocode of the engine's log system
-if (pivot !== 1) {
-    row = row / pivot;
-    steps.push(`R${i+1} = R${i+1} / ${pivot.toFixed(2)}`);
-}
-```
-
----
-
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
