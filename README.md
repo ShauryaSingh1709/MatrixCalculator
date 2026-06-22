@@ -51,7 +51,7 @@ The system doesn't just give the answer—it teaches the concept.
 
 ---
 
-## 📦 Installation
+##  Installation
 
 Clone the repository and install dependencies:
 
@@ -66,7 +66,7 @@ cd matrix-lab
 npm install
 ```
 
-## ⚡ Usage
+## Usage
 
 ### Development Server
 Run the local development server with hot-reload:
@@ -86,7 +86,7 @@ The output will be generated in the `dist/` folder.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 src/
