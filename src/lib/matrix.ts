@@ -1,36 +1,29 @@
-/**
- * MatrixLab — Pure JavaScript Matrix Mathematics Engine
- * Implements all linear algebra operations using Gaussian elimination.
- * Handles floating-point precision with configurable epsilon.
- */
-
 export type Matrix = number[][];
 
 const EPSILON = 1e-10;
 
-/** Clean near-zero floating-point artifacts */
 function cleanFloat(value: number): number {
   if (Math.abs(value) < EPSILON) return 0;
   if (Math.abs(value - Math.round(value)) < EPSILON) return Math.round(value);
   return Math.round(value * 1e10) / 1e10;
 }
 
-/** Clean all entries of a matrix */
+
 function cleanMatrix(matrix: Matrix): Matrix {
   return matrix.map(row => row.map(cleanFloat));
 }
 
-/** Deep clone a matrix */
+
 function cloneMatrix(matrix: Matrix): Matrix {
   return matrix.map(row => [...row]);
 }
 
-/** Format a matrix as a string for logs */
+
 function matrixToString(m: Matrix): string {
   return m.map(row => `[${row.map(n => cleanFloat(n)).join(', ')}]`).join('\n');
 }
 
-/** Validate that a matrix is well-formed (non-empty, rectangular) */
+
 function validateMatrix(matrix: Matrix, name: string = "Matrix"): void {
   if (!matrix || matrix.length === 0) {
     throw new Error(`${name} is empty.`);
@@ -51,12 +44,11 @@ function validateMatrix(matrix: Matrix, name: string = "Matrix"): void {
   }
 }
 
-/** Get matrix dimensions */
+
 export function dimensions(matrix: Matrix): [number, number] {
   return [matrix.length, matrix[0].length];
 }
 
-/** Create an identity matrix of size n */
 export function identityMatrix(n: number): Matrix {
   const result: Matrix = [];
   for (let i = 0; i < n; i++) {
@@ -67,14 +59,10 @@ export function identityMatrix(n: number): Matrix {
   return result;
 }
 
-/** Create a zero matrix of size rows × cols */
 export function zeroMatrix(rows: number, cols: number): Matrix {
   return Array.from({ length: rows }, () => new Array(cols).fill(0));
 }
 
-// ======================== SINGLE MATRIX OPERATIONS ========================
-
-/** Transpose a matrix with steps */
 export function transpose(matrix: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -93,7 +81,7 @@ export function transpose(matrix: Matrix): { result: Matrix, steps: string[] } {
   return { result: cleanMatrix(result), steps };
 }
 
-/** Determinant using Gaussian elimination with steps */
+
 export function determinant(matrix: Matrix): { result: number, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -123,7 +111,6 @@ export function determinant(matrix: Matrix): { result: number, steps: string[] }
   let swaps = 0;
 
   for (let col = 0; col < n; col++) {
-    // Partial pivoting
     let maxRow = col;
     let maxVal = Math.abs(m[col][col]);
     for (let row = col + 1; row < n; row++) {
@@ -148,7 +135,6 @@ export function determinant(matrix: Matrix): { result: number, steps: string[] }
     const pivot = m[col][col];
     det *= pivot;
     
-    // Eliminate below
     for (let row = col + 1; row < n; row++) {
       const factor = m[row][col] / pivot;
       if (Math.abs(factor) > EPSILON) {
@@ -178,7 +164,7 @@ export function determinant(matrix: Matrix): { result: number, steps: string[] }
   return { result: cleanFloat(finalDet), steps };
 }
 
-/** Row Echelon Form with steps */
+
 export function rowEchelonForm(matrix: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -189,7 +175,6 @@ export function rowEchelonForm(matrix: Matrix): { result: Matrix, steps: string[
   for (let col = 0; col < cols && pivotRow < rows; col++) {
     steps.push(`Processing Column ${col+1}...`);
     
-    // Find pivot
     let maxRow = pivotRow;
     let maxVal = Math.abs(m[pivotRow][col]);
     for (let row = pivotRow + 1; row < rows; row++) {
@@ -204,13 +189,13 @@ export function rowEchelonForm(matrix: Matrix): { result: Matrix, steps: string[
       continue;
     }
 
-    // Swap
+
     if (maxRow !== pivotRow) {
       [m[pivotRow], m[maxRow]] = [m[maxRow], m[pivotRow]];
       steps.push(`Swap R${pivotRow+1} ↔ R${maxRow+1} (Pivot: ${cleanFloat(m[pivotRow][col])})`);
     }
 
-    // Eliminate below
+
     for (let row = pivotRow + 1; row < rows; row++) {
       const factor = m[row][col] / m[pivotRow][col];
       if (Math.abs(factor) > EPSILON) {
@@ -229,7 +214,7 @@ export function rowEchelonForm(matrix: Matrix): { result: Matrix, steps: string[
   return { result: cleanMatrix(m), steps };
 }
 
-/** Reduced Row Echelon Form with steps */
+
 export function reducedRowEchelonForm(matrix: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -238,7 +223,6 @@ export function reducedRowEchelonForm(matrix: Matrix): { result: Matrix, steps: 
 
   let pivotRow = 0;
   for (let col = 0; col < cols && pivotRow < rows; col++) {
-    // Find pivot
     let maxRow = pivotRow;
     let maxVal = Math.abs(m[pivotRow][col]);
     for (let row = pivotRow + 1; row < rows; row++) {
@@ -263,7 +247,7 @@ export function reducedRowEchelonForm(matrix: Matrix): { result: Matrix, steps: 
        steps.push(`Scale R${pivotRow+1} by 1/${cleanFloat(pivotVal)} to make pivot 1`);
     }
 
-    // Eliminate above and below
+
     for (let row = 0; row < rows; row++) {
       if (row === pivotRow) continue;
       const factor = m[row][col];
@@ -283,7 +267,7 @@ export function reducedRowEchelonForm(matrix: Matrix): { result: Matrix, steps: 
   return { result: cleanMatrix(m), steps };
 }
 
-/** Rank with steps */
+
 export function rank(matrix: Matrix): { result: number, steps: string[] } {
   const { result: rref, steps } = reducedRowEchelonForm(matrix);
   let r = 0;
@@ -296,7 +280,7 @@ export function rank(matrix: Matrix): { result: number, steps: string[] } {
   return { result: r, steps };
 }
 
-/** Adjoint with steps */
+
 export function adjoint(matrix: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -337,7 +321,7 @@ export function adjoint(matrix: Matrix): { result: Matrix, steps: string[] } {
   return { result: cleanMatrix(adj), steps };
 }
 
-/** Inverse with steps */
+
 export function inverse(matrix: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(matrix, "Matrix");
   const [rows, cols] = dimensions(matrix);
@@ -352,7 +336,7 @@ export function inverse(matrix: Matrix): { result: Matrix, steps: string[] } {
     throw new Error("Matrix is singular (determinant = 0). Inverse does not exist.");
   }
 
-  // Augment [A | I]
+
   const augmented: Matrix = [];
   for (let i = 0; i < n; i++) {
     const row = [...matrix[i]];
@@ -364,7 +348,7 @@ export function inverse(matrix: Matrix): { result: Matrix, steps: string[] } {
   
   steps.push("Formed Augmented Matrix [A | I].");
 
-  // Gauss-Jordan
+
   for (let col = 0; col < n; col++) {
     let maxRow = col;
     let maxVal = Math.abs(augmented[col][col]);
@@ -410,7 +394,7 @@ export function inverse(matrix: Matrix): { result: Matrix, steps: string[] } {
   return { result: cleanMatrix(result), steps };
 }
 
-/** Identity Check */
+
 export function isIdentity(matrix: Matrix): { result: boolean, steps: string[] } {
   const steps = ["Check if diagonal elements are 1 and off-diagonal are 0."];
   const [rows, cols] = dimensions(matrix);
@@ -433,7 +417,6 @@ export function isIdentity(matrix: Matrix): { result: boolean, steps: string[] }
   return { result: true, steps };
 }
 
-// ======================== TWO MATRIX OPERATIONS ========================
 
 export function add(a: Matrix, b: Matrix): { result: Matrix, steps: string[] } {
   validateMatrix(a, "Matrix A");
@@ -445,7 +428,7 @@ export function add(a: Matrix, b: Matrix): { result: Matrix, steps: string[] } {
   const steps = ["Perform element-wise addition: C[i][j] = A[i][j] + B[i][j]"];
   const result = zeroMatrix(ar, ac);
   
-  // Show first few calcs
+
   let count = 0;
   for (let i = 0; i < ar; i++) {
     for (let j = 0; j < ac; j++) {
@@ -519,8 +502,6 @@ export function multiply(a: Matrix, b: Matrix): { result: Matrix, steps: string[
   
   return { result: cleanMatrix(result), steps };
 }
-
-// ======================== EXECUTION HELPERS ========================
 
 export function formatNumber(value: number): string {
   const cleaned = cleanFloat(value);
