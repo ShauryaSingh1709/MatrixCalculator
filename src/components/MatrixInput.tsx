@@ -23,14 +23,7 @@ export function MatrixInput({
   accentColor = 'neon-cyan',
 }: MatrixInputProps) {
   const inputRefs = useRef<(HTMLInputElement | null)[][]>([]);
-  // Local state to handle string input properly (allow "-", "0.", etc.)
   const [localGrid, setLocalGrid] = useState<string[][]>([]);
-
-  // Sync local grid when matrix dimensions change or if external update happens
-  // We use a simple strategy: if dimensions differ, reset. 
-  // If values differ significantly, update local (unless focused?). 
-  // For simplicity in this app, we trust the local state while editing, 
-  // and sync from props only when dimensions change or "reset" happens (which usually changes reference).
   useEffect(() => {
     setLocalGrid(prev => {
       const newGrid: string[][] = [];
@@ -38,27 +31,19 @@ export function MatrixInput({
         const row: string[] = [];
         for(let j=0; j<cols; j++) {
            const propVal = matrix[i]?.[j] ?? 0;
-           // If the grid was resized, we try to preserve what we can, else use propVal
-           // To avoid overwriting user typing "0." with "0", we only sync if the numeric value is different
-           // OR if the prev grid is not initialized at this cell
            const currentLocal = prev[i]?.[j];
            
            if (currentLocal === undefined) {
              row.push(propVal.toString());
            } else {
              const parsedLocal = parseFloat(currentLocal);
-             // If local is valid number and matches prop, keep local to preserve format (e.g. "1.00")
-             // If local is invalid (e.g. "-"), keep local
              if (!isNaN(parsedLocal) && Math.abs(parsedLocal - propVal) < 1e-9) {
                row.push(currentLocal);
              } else if (isNaN(parsedLocal) && currentLocal !== '' && currentLocal !== '-') {
-                // If local is garbage, overwrite
                 row.push(propVal.toString());
              } else if ((currentLocal === '' || currentLocal === '-') && propVal === 0) {
-                 // Keep "empty" or "-" if the value is 0
                  row.push(currentLocal);
              } else {
-                // Value changed externally (e.g. example loaded)
                 row.push(propVal.toString());
              }
            }
@@ -72,11 +57,10 @@ export function MatrixInput({
 
   const handleLocalChange = (i: number, j: number, value: string) => {
     const newGrid = [...localGrid];
-    if (!newGrid[i]) newGrid[i] = []; // Should exist, but safety
+    if (!newGrid[i]) newGrid[i] = []; 
     newGrid[i][j] = value;
     setLocalGrid(newGrid);
 
-    // Parse
     let numVal = 0;
     const cleanValue = value.trim();
     if (cleanValue === '' || cleanValue === '-' || cleanValue === '.' || cleanValue === '-.') {
@@ -86,7 +70,7 @@ export function MatrixInput({
       if (!isNaN(parsed)) numVal = parsed;
     }
 
-    // Update parent
+
     if (matrix[i]?.[j] !== numVal) {
       const newMatrix = matrix.map(row => [...row]);
       if (!newMatrix[i]) newMatrix[i] = [];
