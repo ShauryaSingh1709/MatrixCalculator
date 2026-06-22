@@ -40,7 +40,7 @@ The system doesn't just give the answer—it teaches the concept.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Core:** [React 18](https://reactjs.org/) (Hooks, Context)
 - **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict typing for math logic)
