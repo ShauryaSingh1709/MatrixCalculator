@@ -1,4 +1,3 @@
-//shau
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Snowfall } from '@/components/Snowfall';
 import { GlowOrbs } from '@/components/Background';
@@ -35,7 +34,6 @@ function createMatrix(rows: number, cols: number): Matrix {
 }
 
 export function App() {
-  // Theme
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
@@ -46,32 +44,21 @@ export function App() {
     }
   }, [theme]);
 
-  // Mode
   const [mode, setMode] = useState<Mode>('single');
 
-  // Matrix A
+  
   const [rowsA, setRowsA] = useState(3);
   const [colsA, setColsA] = useState(3);
   const [matrixA, setMatrixA] = useState<Matrix>(() => createMatrix(3, 3));
-
-  // Matrix B
   const [rowsB, setRowsB] = useState(3);
   const [colsB, setColsB] = useState(3);
   const [matrixB, setMatrixB] = useState<Matrix>(() => createMatrix(3, 3));
-
-  // Operation
   const [singleOp, setSingleOp] = useState('transpose');
   const [dualOp, setDualOp] = useState('add');
-
-  // Results
   const [result, setResult] = useState<OperationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [computeTime, setComputeTime] = useState<number | null>(null);
-
-  // Examples dropdown
   const [showExamples, setShowExamples] = useState(false);
-
-  // Resize matrix A
   const handleRowsAChange = useCallback((newRows: number) => {
     setRowsA(newRows);
     setMatrixA(prev => {
@@ -98,7 +85,6 @@ export function App() {
     });
   }, [rowsA]);
 
-  // Resize matrix B
   const handleRowsBChange = useCallback((newRows: number) => {
     setRowsB(newRows);
     setMatrixB(prev => {
@@ -125,7 +111,6 @@ export function App() {
     });
   }, [rowsB]);
 
-  // Load example
   const loadExample = useCallback((name: string) => {
     const ex = EXAMPLES[name as keyof typeof EXAMPLES];
     if (!ex) return;
@@ -148,7 +133,6 @@ export function App() {
     setComputeTime(null);
   }, []);
 
-  // Calculate
   const handleCalculate = useCallback(() => {
     setResult(null);
     setError(null);
@@ -173,7 +157,7 @@ export function App() {
     }
   }, [mode, singleOp, dualOp, matrixA, matrixB]);
 
-  // Reset
+
   const handleReset = useCallback(() => {
     setRowsA(3);
     setColsA(3);
@@ -186,7 +170,7 @@ export function App() {
     setComputeTime(null);
   }, []);
 
-  // Current operation info
+  
   const currentOpInfo = useMemo(() => {
     if (mode === 'single') {
       return SINGLE_OPERATIONS.find(op => op.id === singleOp);
