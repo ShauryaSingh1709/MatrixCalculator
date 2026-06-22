@@ -22,8 +22,8 @@ export function Snowfall() {
       snowflakes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 3 + 1, // radius
-        d: Math.random() * maxFlakes, // density
+        r: Math.random() * 3 + 1, 
+        d: Math.random() * maxFlakes, 
       });
     }
 
@@ -45,21 +45,17 @@ export function Snowfall() {
       for (let i = 0; i < maxFlakes; i++) {
         const p = snowflakes[i];
         
-        // Update coordinates
         p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
         p.x += Math.sin(angle) * 2;
 
-        // Wrap around
+
         if (p.x > width + 5 || p.x < -5 || p.y > height) {
           if (i % 3 > 0) { // 66.67% of the flakes
             snowflakes[i] = { x: Math.random() * width, y: -10, r: p.r, d: p.d };
           } else {
-            // If the flake is exitting from the right
             if (Math.sin(angle) > 0) {
-              // Enter from the left
               snowflakes[i] = { x: -5, y: Math.random() * height, r: p.r, d: p.d };
             } else {
-              // Enter from the right
               snowflakes[i] = { x: width + 5, y: Math.random() * height, r: p.r, d: p.d };
             }
           }
