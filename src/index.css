@@ -15,7 +15,7 @@
   --color-surface-dark: #0b0f1a;
   --color-surface-card: rgba(15, 23, 42, 0.8);
   
-  /* Light mode overrides */
+
   --color-surface-light: #f8fafc;
   --color-surface-card-light: rgba(255, 255, 255, 0.8);
   --color-glass-bg-light: rgba(255, 255, 255, 0.6);
@@ -41,7 +41,7 @@
   --glass-border: var(--color-glass-border-light);
   --glass-hover: var(--color-glass-hover-light);
   --card-bg: var(--color-surface-card-light);
-  --color-neon-cyan: #0891b2; /* Darker cyan for light mode readability */
+  --color-neon-cyan: #0891b2; 
   --color-neon-purple: #7e22ce;
 }
 
